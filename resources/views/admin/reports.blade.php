@@ -52,24 +52,20 @@
     </div>
 
     {{-- Summary Cards --}}
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
         <div class="rounded-xl border border-border bg-card p-5">
             <p class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Total Circulated</p>
             <p class="mt-2 text-xl font-bold">Rp {{ number_format($summary['total_circulated'], 0, ',', '.') }}</p>
         </div>
         <div class="rounded-xl border border-border bg-card p-5">
             <p class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Closed Deals Value</p>
-            <p class="mt-2 text-xl font-bold">Rp {{ number_format($summary['total_closed_value'], 0, ',', '.') }}</p>
-        </div>
-        <div class="rounded-xl border border-border bg-card p-5">
-            <p class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Interest Earned</p>
-            <p class="mt-2 text-xl font-bold text-success">Rp {{ number_format($summary['total_interest_value'], 0, ',', '.') }}</p>
+            <p class="mt-2 text-xl font-bold text-success">Rp {{ number_format($summary['total_closed_value'], 0, ',', '.') }}</p>
         </div>
         <div class="rounded-xl border border-border bg-card p-5">
             <p class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Avg Loan Size</p>
             <p class="mt-2 text-xl font-bold">Rp {{ number_format($summary['avg_loan_size'], 0, ',', '.') }}</p>
         </div>
-    </div>
+</div>
 
     {{-- DataTable --}}
     <div class="rounded-xl border border-border bg-card p-5">
@@ -84,6 +80,7 @@
                     <th>Interest</th>
                     <th>Total Repayable</th>
                     <th>Status</th>
+                    <th>Repayment</th>
                     <th>Posted</th>
                     <th>Closed</th>
                 </tr>
@@ -104,6 +101,7 @@
                                 <span class="badge-closed">Closed</span>
                             @endif
                         </td>
+                        <td>{{ $row['repayment'] }}</td>
                         <td>{{ $row['posted_at'] }}</td>
                         <td>{{ $row['closed_at'] }}</td>
                     </tr>

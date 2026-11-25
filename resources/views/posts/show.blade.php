@@ -21,7 +21,7 @@
                     <span class="inline-flex items-center rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">Closed</span>
                 @else
                     <span class="inline-flex items-center gap-1.5 rounded-full bg-success/10 px-3 py-1 text-xs font-medium text-success">
-                        Open for offers
+                        Open
                     </span>
                 @endif
             </div>
@@ -31,7 +31,7 @@
 
         {{-- Loan details card --}}
         <div class="mx-6 mt-4 rounded-lg border border-border bg-muted/30 p-4">
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
                 <div>
                     <p class="text-xs text-muted-foreground uppercase tracking-wider">Amount</p>
                     <p class="mt-1 text-lg font-bold">{{ $post->formatted_amount }}</p>
@@ -41,8 +41,8 @@
                     <p class="mt-1 text-lg font-bold">{{ $post->interest_rate }}%</p>
                 </div>
                 <div>
-                    <p class="text-xs text-muted-foreground uppercase tracking-wider">Total Repay</p>
-                    <p class="mt-1 text-lg font-bold">{{ $post->formatted_total }}</p>
+                    <p class="text-xs text-muted-foreground uppercase tracking-wider">Repay In</p>
+                    <p class="mt-1 text-lg font-bold">{{ $post->formatted_repayment }}</p>
                 </div>
                 <div>
                     <p class="text-xs text-muted-foreground uppercase tracking-wider">Collateral</p>

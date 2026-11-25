@@ -64,6 +64,29 @@
                 @enderror
             </div>
 
+            <div>
+                <label class="block text-sm font-medium mb-1.5">Repayment Period</label>
+                <div class="flex gap-3">
+                    <input type="number" name="repayment_period" id="repayment_period"
+                           value="{{ old('repayment_period', 1) }}" min="1" max="365" required
+                           class="w-24 rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                    <select name="repayment_unit" id="repayment_unit" required
+                            class="rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                        <option value="days" {{ old('repayment_unit') === 'days' ? 'selected' : '' }}>Days</option>
+                        <option value="weeks" {{ old('repayment_unit') === 'weeks' ? 'selected' : '' }}>Weeks</option>
+                        <option value="months" {{ old('repayment_unit', 'months') === 'months' ? 'selected' : '' }}>Months</option>
+                        <option value="years" {{ old('repayment_unit') === 'years' ? 'selected' : '' }}>Years</option>
+                    </select>
+                </div>
+                <p class="mt-1 text-xs text-muted-foreground">How long you need to repay the loan.</p>
+                @error('repayment_period')
+                    <p class="mt-1 text-xs text-destructive">{{ $message }}</p>
+                @enderror
+                @error('repayment_unit')
+                    <p class="mt-1 text-xs text-destructive">{{ $message }}</p>
+                @enderror
+            </div>
+
             <div class="flex items-center gap-3 pt-2">
                 <button type="submit"
                         class="rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors">

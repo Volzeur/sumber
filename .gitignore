@@ -1,8 +1,9 @@
+
 *.log
 .DS_Store
 .env
-.env.backup
-.env.production
+.env.*
+!.env.example
 .phpactor.json
 .phpunit.result.cache
 /.codex
@@ -19,3 +20,23 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Laravel generated files
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
+
+/storage/*.key
+/storage/app/private/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+/storage/logs/*
+
+# Frontend build dependencies
+/public/build
+/public/hot
+
+# IDE and operating system
+*.swp
+*.swo

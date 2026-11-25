@@ -36,6 +36,7 @@ class ReportController extends Controller
                 'status' => $post->status,
                 'posted_at' => $post->created_at->format('Y-m-d H:i'),
                 'closed_at' => $post->closed_at?->format('Y-m-d H:i') ?? '-',
+                'repayment' => $post->formatted_repayment,
             ];
         });
 

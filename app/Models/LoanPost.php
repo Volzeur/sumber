@@ -16,6 +16,8 @@ class LoanPost extends Model
         'amount_needed',
         'interest_rate',
         'collateral_description',
+        'repayment_period',
+        'repayment_unit',
         'status',
         'closed_at',
     ];
@@ -57,6 +59,15 @@ class LoanPost extends Model
     public function getTotalWithInterestAttribute(): float
     {
         return $this->amount_needed * (1 + $this->interest_rate / 100);
+    }
+
+    public function getFormattedRepaymentAttribute(): string
+    {
+        $unit = $this->repayment_period === 1
+            ? rtrim($this->repayment_unit, 's')
+            : $this->repayment_unit;
+
+        return $this->repayment_period . ' ' . $unit;
     }
 
     public function getFormattedTotalAttribute(): string

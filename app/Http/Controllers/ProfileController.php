@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class ProfileController extends Controller
 {
@@ -24,7 +27,6 @@ class ProfileController extends Controller
         ]);
 
         if ($request->hasFile('avatar')) {
-            // Delete old avatar
             if ($user->avatar) {
                 Storage::disk('public')->delete($user->avatar);
             }
@@ -34,5 +36,33 @@ class ProfileController extends Controller
         $user->update($validated);
 
         return back()->with('success', 'Profile updated.');
+    }
+
+    public function destroy(Request $request)
+    {
+        $request->validate([
+            'password' => ['required'],
+        ]);
+
+        $user = $request->user();
+
+        if (!Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'password' => ['The password is incorrect.'],
+            ]);
+        }
+
+        // Delete avatar file if exists
+        if ($user->avatar) {
+            Storage::disk('public')->delete($user->avatar);
+        }
+
+        Auth::logout();
+        $user->delete(); // cascades to loan_posts
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('feed')->with('success', 'Your account has been deleted.');
     }
 }

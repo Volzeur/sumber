@@ -19,6 +19,8 @@ class StoreLoanPostRequest extends FormRequest
             'amount_needed' => ['required', 'numeric', 'min:10000', 'max:999999999'],
             'interest_rate' => ['required', 'numeric', 'min:0', 'max:100'],
             'collateral_description' => ['required', 'string', 'max:500'],
+            'repayment_period' => ['required', 'integer', 'min:1', 'max:365'],
+            'repayment_unit' => ['required', 'in:days,weeks,months,years'],
         ];
     }
 

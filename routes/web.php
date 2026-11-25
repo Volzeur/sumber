@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/posts/{post}', [LoanPostController::class, 'destroy'])->name('posts.destroy');
     Route::patch('/posts/{post}/close', [LoanPostController::class, 'close'])->name('posts.close');
     Route::get('/posts/{post}/pdf', [LoanPostController::class, 'downloadPdf'])->name('posts.pdf');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // My Posts
     Route::get('/my-posts', [LoanPostController::class, 'myPosts'])->name('my-posts');
@@ -53,4 +54,5 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/reports/xlsx', [ReportController::class, 'exportXlsx'])->name('reports.xlsx');
     Route::get('/users', [UserManagementController::class, 'index'])->name('users');
     Route::patch('/users/{user}/toggle-role', [UserManagementController::class, 'toggleRole'])->name('users.toggle-role');
+    Route::delete('/users/{user}', [UserManagementController::class, 'destroy'])->name('users.destroy');
 });

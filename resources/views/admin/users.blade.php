@@ -43,13 +43,20 @@
                         <td data-order="{{ $user->created_at->timestamp }}">{{ $user->created_at->format('Y-m-d') }}</td>
                         <td>
                             @if($user->id !== auth()->id())
-                                <form method="POST" action="{{ route('admin.users.toggle-role', $user) }}"
-                                      onsubmit="return confirm('Toggle role for {{ $user->name }}?')">
-                                    @csrf @method('PATCH')
-                                    <button class="btn-action">
-                                        {{ $user->isAdmin() ? 'Demote' : 'Promote' }}
-                                    </button>
-                                </form>
+                                <div class="actions-cell">
+                                    <form method="POST" action="{{ route('admin.users.toggle-role', $user) }}"
+                                          onsubmit="return confirm('Toggle role for {{ $user->name }}?')">
+                                        @csrf @method('PATCH')
+                                        <button class="btn-action">
+                                            {{ $user->isAdmin() ? 'Demote' : 'Promote' }}
+                                        </button>
+                                    </form>
+                                    <form method="POST" action="{{ route('admin.users.destroy', $user) }}"
+                                          onsubmit="return confirm('Delete {{ $user->name }} and ALL their posts? This cannot be undone.')">
+                                        @csrf @method('DELETE')
+                                        <button class="btn-action btn-danger">Delete</button>
+                                    </form>
+                                </div>
                             @else
                                 <span class="text-xs text-muted-foreground">You</span>
                             @endif

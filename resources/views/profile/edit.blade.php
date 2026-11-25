@@ -59,4 +59,31 @@
             </button>
         </form>
     </div>
+    
+    {{-- Danger Zone --}}
+    <div class="mt-8 rounded-xl border border-destructive/20 bg-card p-6">
+        <h2 class="text-lg font-semibold text-destructive mb-1">Delete Account</h2>
+        <p class="text-sm text-muted-foreground mb-5">Permanently delete your account and all your loan posts. This cannot be undone.</p>
+
+        <form method="POST" action="{{ route('profile.destroy') }}"
+              onsubmit="return confirm('Are you absolutely sure? All your posts will be permanently deleted.')">
+            @csrf
+            @method('DELETE')
+
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium mb-1.5">Confirm your password</label>
+                <input type="password" name="password" id="password" required
+                       placeholder="Enter your password to confirm"
+                       class="w-full max-w-sm rounded-lg border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                @error('password')
+                    <p class="mt-1 text-xs text-destructive">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <button type="submit"
+                    class="rounded-lg bg-destructive px-5 py-2 text-sm font-medium text-destructive-foreground hover:bg-destructive/90 transition-colors">
+                Delete My Account
+            </button>
+        </form>
+    </div>
 </x-layouts.app>
